@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Direction | muxlab</title>
+    <style>
+        /* CSS for table to span full width */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        th,
+        td {
+            padding: 8px;
+            border: 1px solid #d1cbcb;
+            text-align: left;
+        }
+
+        th {
+            background-color: #dddddd;
+        }
+
+        tr:hover {
+            background-color: #e4dede;
+        }
+    </style>
+</head>
+
+<body id="body" class="light">
+
+    <!-- Navbar -->
+    <nav>
+        <div class="navbar-right">
+            <a href="index.html" class="profile">
+                <img src="https://muxlab.com/wp-content/uploads/2022/02/Mux-Logo.png" id="Mux-Logo" width="140px"
+                    height="36px" object-fit="cover">
+            </a>
+        </div>
+    </nav>
+    <!-- End of Navbar -->
+
+    <!-- <main>
+        <div class="header">
+            <div class="left">
+                <h2>Wind Direction</h2>
+            </div>
+        </div>
+        <center>
+            <li>
+                <div class="DirectionDiv" style="width: 20%;"> <img src="Direction.png" id="DirectionIcon"> </div>
+                </span>
+            </li>
+        </center>
+    </main> -->
+
+
+    <!-- datadisplayfrompreviousscreen -->
+
+    <div class="data-display">
+
+        <div id="displayedData">
+            <!-- Display the fetched data here -->
+        </div>
+    </div>
+    <!-- <canvas id="windDirectionChart" width="500" height="120"></canvas> -->
+    <script>
+        // Retrieve wind direction data from local storage
+        const windDirectionData = localStorage.getItem('windDirection');
+
+        // Display the retrieved wind direction data in the specified div
+        const displayedData = document.getElementById('displayedData');
+        displayedData.innerHTML = `
+            <p>Wind Direction: ${windDirectionData}</p>
+        `;
+    //     // Create a chart using Chart.js
+    //     const ctx = document.getElementById('windDirectionChart').getContext('2d');
+    //     const windDirectionChart = new Chart(ctx, {
+    //         type: 'bar', // You can change the chart type as needed
+    //         data: {
+    //             labels: ['windDirection'],
+    //             datasets: [{
+    //                 label: 'windDirection',
+    //                 data: [parseFloat(windDirectionData)],
+    //                 backgroundColor: 'rgba(75, 192, 192, 0.2)',
+    //                 borderColor: 'rgba(75, 192, 192, 1)',
+    //                 borderWidth: 1
+    //             }]
+    //         },
+    //         options: {
+    //             scales: {
+    //                 y: {
+    //                     beginAtZero: true
+    //                 }
+    //             }
+    //         }
+    //     });
+
+    // </script>
+
+  <div style="width: 80%; margin: auto; height: 10%;">
+    <canvas id="windDirectionChart"></canvas>
+</div>
+
+<!-- Displayed data table (if needed) -->
+<div id="displayedDataa"></div>
+
+<script>
+    const token = 'BBUS-0UYsgnN53cuSgziuuoZVXN0j0gW1b7';
+    const apiUrl = 'https://stem.ubidots.com/api/v1.6/variables/655888772017250643932d52/values?period=5T&statistic=raw&timestamp__gte=1704658643195&page_size=2000&tz=Asia%2FKarachi&token=' + token;
+
+    // Fetch data from the API
+    fetch(apiUrl)
+        .then(response => response.json())
+        .then(data => {
+            const results = data.results;
+
+            // Extracting data for the chart
+            const labels = results.map(result => new Date(result.timestamp).toLocaleString());
+            const values = results.map(result => result.value);
+
+            // Creating a line chart using Chart.js
+            const ctx = document.getElementById('windDirectionChart').getContext('2d');
+            const windDirectionChart = new Chart(ctx, {
+                type: 'line',
+                data: {
+                    labels: labels,
+                    datasets: [{
+                        label: 'windDirection Data',
+                        data:values,
+                        backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                        borderColor: 'rgba(75, 192, 192, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            });
+
+            // Creating an HTML table to display data (if needed)
+            let tableHtml = '<table>';
+            tableHtml += '<tr><th>Date</th><th>Value</th><th>Context</th></tr>';
+
+            // Loop through fetched data and populate the table rows
+            results.forEach(result => {
+                const date = new Date(result.timestamp).toLocaleString();
+                const value = result.value;
+                const context = JSON.stringify(result.context);
+
+                // Create table row with date, value, and context
+                tableHtml += `<tr><td>${date}</td><td>${value}</td><td>${context}</td></tr>`;
+            });
+
+            tableHtml += '</table>';
+
+            // Displaying the table with fetched data (if needed)
+            const displayedData = document.getElementById('displayedDataa');
+            displayedData.innerHTML = tableHtml;
+        })
+        .catch(error => {
+            console.error('Error fetching data:', error);
+        });
+</script>
+
+</body>
+</html>

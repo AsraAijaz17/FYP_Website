@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Temperature Chart</title>
+    <!-- Include Chart.js -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div id="displayedData">
+        <!-- Temperature data will be displayed here -->
+    </div>
+    <canvas id="temperatureChart" width="400" height="100"></canvas>
+
+    <script>
+        // Retrieve temperature data from local storage
+        const temperatureData = localStorage.getItem('temperature');
+
+        // Display the retrieved temperature data
+        const displayedData = document.getElementById('displayedData');
+        displayedData.innerHTML = `
+            <p>Temperature: ${temperatureData}</p>
+        `;
+
+        // Create a chart using Chart.js
+        const ctx = document.getElementById('temperatureChart').getContext('2d');
+        const temperatureChart = new Chart(ctx, {
+            type: 'bar', // You can change the chart type as needed
+            data: {
+                labels: ['Temperature'],
+                datasets: [{
+                    label: 'Temperature',
+                    data: [parseFloat(temperatureData)], // Assuming temperatureData is a number
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>
