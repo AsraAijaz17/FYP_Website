@@ -65,7 +65,80 @@ const logout = () => {
 
 //---------------------------------------------------------------------------
 
-//ShowData Function On Ui
+//-----------------ye update wali chz add krne s phle ka code---------------------------------
+
+// // ShowData Function On Ui
+
+// const populateTable = () => {
+//     var users = db.collection("users");
+//     const tbody = document.querySelector('tbody');
+
+//     users.get().then((querySnapshot) => {
+//         querySnapshot.forEach((doc) => {
+//             const userData = doc.data();
+//             const tr = document.createElement('tr');
+
+//             tr.innerHTML = `
+//                 <td>${doc.id}</td>
+//                 <td>${userData.UserName}</td>
+//                 <td>${userData.Password}</td>
+//                 <td>${userData.Role}</td>
+
+//                 <td>
+//                     <button class="btn btn-delete" onclick="deleteUser('${doc.id}')">Delete</button>
+//                     <button class="btn btn-update">Update</button>
+//                 </td>
+//             `;
+
+//             tbody.appendChild(tr);
+//         });
+//     });
+// }
+// // Function to open modal with existing data
+
+// //------------------------------------------------------------------------------------------------------
+
+// //Delete Function
+// const deleteUser = (userId) => {
+//     db.collection("users").doc(userId).delete().then(() => {
+//         console.log("Document successfully deleted!");
+//         // Refresh the table after deletion
+//         // populateTable();
+//         // Display success message
+//         showSnackbar("Document successfully deleted from database.");
+//     }).catch((error) => {
+//         console.error("Error removing document: ", error);
+//     });
+// }
+// //----------------------------------------------------------------------------------------------
+
+// //snackbar code
+
+// const showSnackbar = (message) => {
+//     var snackbar = document.getElementById("snackbar");
+//     snackbar.textContent = message;
+//     snackbar.className = "show";
+//     snackbar.style.backgroundColor = "#f44336"; // Red color
+//     setTimeout(function () { snackbar.className = snackbar.className.replace("show", ""); }, 3000);
+// }
+
+
+
+
+
+
+// //------------------------
+
+
+
+
+
+
+// populateTable();
+
+
+//-----------------ye update wali chz add krne s phle ka code---------------------------------
+
 
 const populateTable = () => {
     var users = db.collection("users");
@@ -81,10 +154,10 @@ const populateTable = () => {
                 <td>${userData.UserName}</td>
                 <td>${userData.Password}</td>
                 <td>${userData.Role}</td>
-                
+
                 <td>
                     <button class="btn btn-delete" onclick="deleteUser('${doc.id}')">Delete</button>
-                    <button class="btn btn-update">Update</button>
+                    <button class="btn btn-update" onclick="openUpdateModal('${doc.id}')">Update</button>
                 </td>
             `;
 
@@ -92,23 +165,15 @@ const populateTable = () => {
         });
     });
 }
-//------------------------------------------------------------------------------------------------------
 
-//Delete Function
 const deleteUser = (userId) => {
     db.collection("users").doc(userId).delete().then(() => {
         console.log("Document successfully deleted!");
-        // Refresh the table after deletion
-        // populateTable();
-        // Display success message
         showSnackbar("Document successfully deleted from database.");
     }).catch((error) => {
         console.error("Error removing document: ", error);
     });
 }
-//----------------------------------------------------------------------------------------------
-
-//snackbar code
 
 const showSnackbar = (message) => {
     var snackbar = document.getElementById("snackbar");
@@ -118,15 +183,11 @@ const showSnackbar = (message) => {
     setTimeout(function () { snackbar.className = snackbar.className.replace("show", ""); }, 3000);
 }
 
-
-
-
-
-
-//------------------------
-
-
 populateTable();
 
-
+// Function to open modal with existing data and redirect to update.html
+const openUpdateModal = (userId) => {
+    // Redirect the user to update.html with the user ID as a query parameter
+    window.location.href = `update.html?userId=${userId}`;
+}
 
