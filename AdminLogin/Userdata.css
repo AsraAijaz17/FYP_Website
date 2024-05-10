@@ -1,115 +1,164 @@
- /* ------------snackbarr cssss --------- */
+body,
+html {
+    margin: 0;
+    padding: 0;
+}
 
- #snackbar {
-     visibility: hidden;
-     min-width: 250px;
-     margin-left: -125px;
-     background-color: #333;
-     color: #fff;
-     text-align: center;
-     border-radius: 2px;
-     padding: 16px;
-     position: fixed;
-     z-index: 1;
-     left: 50%;
-     bottom: 30px;
- }
+.mainDiv {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #14246b;
+}
 
- #snackbar.show {
-     visibility: visible;
-     -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
-     animation: fadein 0.5s, fadeout 0.5s 2.5s;
- }
+.tableDiv {
+    background-color: white;
+    padding: 20px;
+    /* Adjust padding as needed */
+    border-radius: 10px;
+    /* Add rounded corners if desired */
+}
 
- @-webkit-keyframes fadein {
-     from {
-         bottom: 0;
-         opacity: 0;
-     }
 
-     to {
-         bottom: 30px;
-         opacity: 1;
-     }
- }
 
- @keyframes fadein {
-     from {
-         bottom: 0;
-         opacity: 0;
-     }
 
-     to {
-         bottom: 30px;
-         opacity: 1;
-     }
- }
 
- @-webkit-keyframes fadeout {
-     from {
-         bottom: 30px;
-         opacity: 1;
-     }
+/* ------------snackbarr cssss --------- */
 
-     to {
-         bottom: 0;
-         opacity: 0;
-     }
- }
+#snackbar {
+    visibility: hidden;
+    min-width: 250px;
+    margin-left: -125px;
+    background-color: #333;
+    color: #fff;
+    text-align: center;
+    border-radius: 2px;
+    padding: 16px;
+    position: fixed;
+    z-index: 1;
+    left: 50%;
+    bottom: 30px;
+}
 
- @keyframes fadeout {
-     from {
-         bottom: 30px;
-         opacity: 1;
-     }
+#snackbar.show {
+    visibility: visible;
+    -webkit-animation: fadein 0.5s, fadeout 0.5s 2.5s;
+    animation: fadein 0.5s, fadeout 0.5s 2.5s;
+}
 
-     to {
-         bottom: 0;
-         opacity: 0;
-     }
- }
+@-webkit-keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
 
- /*--------------- Snackbarrrrrr css ---------------*/
- /* Style for the table */
- table {
-     width: 100%;
-     border-collapse: collapse;
-     margin-bottom: 20px;
- }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
 
- /* Style for table header */
- th {
-     background-color: #f2f2f2;
-     padding: 8px;
-     text-align: left;
-     border: 1px solid #ddd;
- }
+@keyframes fadein {
+    from {
+        bottom: 0;
+        opacity: 0;
+    }
 
- /* Style for table data */
- td {
-     padding: 8px;
-     border: 1px solid #ddd;
- }
+    to {
+        bottom: 30px;
+        opacity: 1;
+    }
+}
 
- /* Style for alternating row colors */
- tr:nth-child(even) {
+@-webkit-keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+@keyframes fadeout {
+    from {
+        bottom: 30px;
+        opacity: 1;
+    }
+
+    to {
+        bottom: 0;
+        opacity: 0;
+    }
+}
+
+/*--------------- Snackbarrrrrr css ---------------*/
+/* Style for the table */
+
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+/* Style for table header */
+th {
+    background-color: #f2f2f2;
+    padding: 8px;
+    text-align: left;
+    border: 1px solid #ddd;
+}
+
+/* Style for table data */
+td {
+    padding: 8px;
+    border: 1px solid #ddd;
+}
+
+/* Style for alternating row colors */
+/* tr:nth-child(even) {
      background-color: #f9f9f9;
- }
+ } */
 
- /* Style for buttons */
- .btn {
-     padding: 5px 10px;
-     border: none;
-     cursor: pointer;
-     border-radius: 4px;
- }
+/* Style for buttons */
+.btn {
+    padding: 5px 10px;
+    border: none;
+    cursor: pointer;
+    border-radius: 4px;
+}
 
- .btn-delete {
-     background-color: #f44336;
-     color: white;
- }
+.btn-delete {
+    background-color: #f44336;
+    color: white;
+}
 
- .btn-update {
-     background-color: #4CAF50;
-     color: white;
- }
+.btn-update {
+    background-color: #4CAF50;
+    color: white;
+}
+
+.AddUserButton {
+    background-color: #12831e;
+    width: 200px;
+    height: 40px;
+    /* Green color */
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    margin-bottom: 20px;
+    /* Margin bottom for spacing */
+}
+
+.AddUserButton:hover {
+    background-color: #0b601c;
+    /* Darker green on hover */
+}
